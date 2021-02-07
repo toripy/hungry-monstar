@@ -1,0 +1,48 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-image: url(./background.jpg);
+}
+
+.a {
+    color: green;
+}
+
+.navBar {
+    color: #383838;
+}
+
+#button {
+    color: white;
+    background-color: tomato;
+}
+
+#search {
+    background-color: #F5F7F5;
+}
+
+.image {
+    width: 100%;
+}
+
+.foodCard {
+    height: 100%;
+    border: 0px;
+    border-radius: 5%;
+    background-color: #F8F7F5;
+}
+
+.foodDetail {
+    margin: 100px auto;
+    border: 0px;
+    border-radius: 5%;
+    background-color: #F8F7F5;
+    width: 50%;
+}
+
+.listItem {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+span {
+    color: red;
+}
