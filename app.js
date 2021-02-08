@@ -1,30 +1,10 @@
-async function loadData(name) {
+const takeData = async() => {
+
+    const foodName = document.getElementById("search").value;
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`);
     const data = await response.json();
-    return data;
-}
-
-const displayFoodDetails = name => {
-    const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${name}`;
-
-    fetch(url)
-        .then(res => res.json())
-        .then(data => renderFoodInfo(data.meals[0]));
-    // console.log(data.meals[0]))
+    displayFoods(data);
 };
-
-
-const takeData = () => {
-    document.getElementById("button").addEventListener("click", () => {
-        const foodName = document.getElementById("search").value;
-
-        loadData(foodName).then(data => {
-            displayFoods(data);
-        });
-    });
-
-};
-takeData();
 
 // After Search
 const displayFoods = (data) => {
@@ -33,20 +13,26 @@ const displayFoods = (data) => {
     meals.forEach(element => {
         const cardDiv = document.createElement("div");
         cardDiv.className = "col";
-        const foodInfo = `
-            <div onclick="displayFoodDetails(${element.idMeal})" class="foodCard  card  text-center">
-                <img src="${element.strMealThumb}" class="image card-img-top" alt="...">
-                <div class="card-body">
-                <h5 class="card-title">${element.strMeal}</h5>
-                </div>
+
+        cardDiv.innerHTML = `
+        <div onclick="displayFoodDetails(${element.idMeal})" class="foodCard  card  text-center">
+            <img src="${element.strMealThumb}" class="image card-img-top" alt="...">
+            <div class="card-body">
+            <h5 class="card-title">${element.strMeal}</h5>
             </div>
-        `;
-        cardDiv.innerHTML = foodInfo;
+        </div>
+    `;
         cardGroup.appendChild(cardDiv);
     });
     document.getElementById("search").value = "";
-}
+};
 
+const displayFoodDetails = async name => {
+    const url = await `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${name}`;
+    const response = await fetch(url);
+    const data = await response.json()
+    renderFoodInfo(data.meals[0])
+};
 // When click on Card
 const renderFoodInfo = food => {
 
